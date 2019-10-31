@@ -125,13 +125,7 @@ class _TFGradientExplainer(Explainer):
 
         # determine the model inputs and outputs
         self.model = model
-        if str(type(model)).endswith("keras.engine.sequential.Sequential'>"):
-            self.model_inputs = model.inputs
-            self.model_output = model.layers[-1].output
-        elif str(type(model)).endswith("keras.models.Sequential'>"):
-            self.model_inputs = model.inputs
-            self.model_output = model.layers[-1].output
-        elif str(type(model)).endswith("keras.engine.training.Model'>"):
+        if "keras" in str(type(model)):
             self.model_inputs = model.inputs
             self.model_output = model.layers[-1].output
         elif str(type(model)).endswith("tuple'>"):
